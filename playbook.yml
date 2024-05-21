@@ -1,0 +1,19 @@
+---
+- name: Create file using ansible_user and remote environment USER variable
+  hosts: all
+  tasks:
+    - name: Gather facts
+      ansible.builtin.setup:
+
+    - name: Create a file with ansible_user and remote USER environment variable
+      file:
+        path: "/home/{{ ansible_user }}/{{ ansible_facts.env.USER }}_file.txt"
+        state: touch
+
+    - name: Check if the file is created
+      command: ls /home/{{ ansible_user }}/{{ ansible_facts.env.USER }}_file.txt
+      register: ls_output
+
+    - name: Print ls command output
+      debug:
+        var: ls_output.stdout    
