@@ -1,6 +1,6 @@
 ---
 - name: Create file using ansible_user and remote environment USER variable
-  hosts: all
+  hosts: remote
   tasks:
     - name: Gather facts
       ansible.builtin.setup:
